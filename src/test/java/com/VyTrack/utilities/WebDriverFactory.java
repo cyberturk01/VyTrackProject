@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class BrowserFactory {
+public class WebDriverFactory {
     public static WebDriver getDriver(String browserType){
         WebDriver driver=null;
         switch (browserType.toLowerCase()){

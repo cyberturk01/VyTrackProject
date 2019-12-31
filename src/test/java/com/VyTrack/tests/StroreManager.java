@@ -1,27 +1,22 @@
 package com.VyTrack.tests;
 
-import com.VyTrack.utilities.BrowserFactory;
-import com.github.javafaker.Bool;
+import com.VyTrack.utilities.WebDriverFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class StroreManager {
     WebDriver driver;
     @BeforeMethod
     public void connection(){
-        driver= BrowserFactory.getDriver("chrome");
+        driver= WebDriverFactory.getDriver("chrome");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://qa1.vytrack.com/");
         driver.manage().window().maximize();
@@ -103,30 +98,7 @@ public class StroreManager {
 
     }
 
-    @DataProvider(name="Sign out")
-    public Object[][] signOutTrial(){
-        Object[][] obj =new Object[4][2];
-        obj [0][0]="user13";
-        obj [0][1]="UserUser123";
-        obj [0][0]="user14";
-        obj [0][1]="UserUser123";
-        obj [0][0]="user15";
-        obj [0][1]="UserUser123";
-        return obj;
-    }
 
-    @Test(dataProvider = "Sign out")
-    public void sigOutTest(String username, String password){
-        driver.findElement(By.name("_username")).sendKeys(username);
-        driver.findElement(By.name("_password")).sendKeys(password + Keys.ENTER);
-//      driver.findElement(By.xpath("//button")).click();
-
-        WebElement first= driver.findElement(By.xpath("(//*[contains(text(), 'Stephan Haley')])[1]"));
-        WebElement logout= driver.findElement(By.xpath("//*[contains(text(),'Logout')]"));
-
-       Actions actions= new Actions(driver);
-       actions.moveToElement(first).click().pause(2000).moveToElement(logout).release().build().perform();
-    }
 
     @AfterMethod
     public void tearDownMethod() throws InterruptedException {
